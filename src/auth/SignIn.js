@@ -11,7 +11,6 @@ import {
   Modal
 } from 'react-native';
 
-// import { Auth } from 'aws-amplify'
 import axios from 'axios';
 import { connect } from 'react-redux'
 
@@ -36,11 +35,6 @@ class SignIn extends Component<{}> {
   signIn() {
     const { username, email } = this.state
     this.props.dispatchAuthenticate(this.state.username, this.state.email, this.props.auth.token)
-  }
-
-  confirm() {
-    const { authCode } = this.state
-    this.props.dispatchConfirmUserLogin(authCode)
   }
 
   render() {
@@ -94,7 +88,6 @@ class SignIn extends Component<{}> {
 }
 
 const mapDispatchToProps = {
-  dispatchConfirmUserLogin: authCode => confirmUserLogin(authCode),
   dispatchAuthenticate: (username, email, token) => authenticate(username, email, token)
 }
 

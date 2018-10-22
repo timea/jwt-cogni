@@ -6,21 +6,11 @@ import {
   SIGN_UP,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-  SHOW_SIGN_IN_CONFIRMATION_MODAL,
-  SHOW_SIGN_UP_CONFIRMATION_MODAL,
-  CONFIRM_SIGNUP,
-  CONFIRM_SIGNUP_SUCCESS,
-  CONFIRM_SIGNUP_FAILURE,
-  CONFIRM_LOGIN,
-  CONFIRM_LOGIN_SUCCESS,
-  CONFIRM_LOGIN_FAILURE
 } from './reducers/auth'
 
 import { Alert, AsyncStorage } from 'react-native'
 import deviceStorage from './services/deviceStorage'
 import axios from 'axios'
-
-// import { Auth } from 'aws-amplify'
 
 function signUp() {
   return {
@@ -51,7 +41,7 @@ export function createUser(username, email) {
     },)
     .then(user => {
       dispatch(signUpSuccess(user))
-      dispatch(confirmSignUpSuccess())
+      // dispatch(confirmSignUpSuccess())
     })
     .catch(err => {
       dispatch(signUpFailure(err))
@@ -98,61 +88,10 @@ export function authenticate(username, email, token) {
     }, {headers: headers})
     .then(user => {
         dispatch(logInSuccess(user))
-        dispatch(confirmLoginSuccess(user))
+        // dispatch(confirmLoginSuccess(user))
       })
       .catch(err => {
         dispatch(logInFailure(err))
       });
-  }
-}
-
-export function showSignInConfirmationModal() {
-  return {
-    type: SHOW_SIGN_IN_CONFIRMATION_MODAL
-  }
-}
-
-export function showSignUpConfirmationModal() {
-  return {
-    type: SHOW_SIGN_UP_CONFIRMATION_MODAL
-  }
-}
-
-function confirmLogIn() {
-  return {
-    type: CONFIRM_LOGIN
-  }
-}
-
-function confirmLoginSuccess(user) {
-  return {
-    type: CONFIRM_LOGIN_SUCCESS,
-    user
-  }
-}
-
-function confirmLoginFailure() {
-  return {
-    type: CONFIRM_LOGIN_FAILURE,
-    user
-  }
-}
-
-function confirmSignUp() {
-  return {
-    type: CONFIRM_SIGNUP
-  }
-}
-
-function confirmSignUpSuccess() {
-  return {
-    type: CONFIRM_SIGNUP_SUCCESS
-  }
-}
-
-function confirmSignUpFailure(error) {
-  return {
-    type: CONFIRM_SIGNUP_FAILURE,
-    error
   }
 }
